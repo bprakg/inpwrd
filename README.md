@@ -8,6 +8,6 @@ POST localhost:8080/urlanalysis
 payload 
 {
 	"url":"https://www.google.com",
-	"callbackUrl":"https://inpwrd.com/results"
+	"callbackUrl":"https://callbackurl.com/results"
 }
 
