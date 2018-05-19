@@ -1,6 +1,5 @@
 package com.inpwrd.api.service;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
@@ -24,8 +23,8 @@ public class AnalysisController {
 	private AnalysisBusiness business;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public Analysis analyze(@RequestParam @Valid @NotNull String url) {
-		LOGGER.info("get " + url);
+	public Analysis analyze(@RequestParam @NotNull String url) {
+		LOGGER.info("GET - " + url);
 		return business.getAnalysis(url);
 	}
 
@@ -33,12 +32,12 @@ public class AnalysisController {
 	public Analysis addAnalysis(@RequestBody Analysis analysis) {
 		LOGGER.info("post " + analysis);
 
-		if(analysis.getCallbackUrl() != null) {
+		if (analysis.getCallbackUrl() != null) {
 			LOGGER.info("new process thread");
-			new Thread(()-> {
+			new Thread(() -> {
 				business.addAnalysis(analysis);
 			}).start();
-			
+
 			LOGGER.info("returning for callback ");
 			return null;
 		} else {

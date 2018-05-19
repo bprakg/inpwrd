@@ -17,7 +17,7 @@ public class AnalysisData {
 	private AnalysisRepository repo;
 
 	public Analysis getAnalysis(String url) {
-		LOGGER.info(url);
+		LOGGER.info("url: " + url);
 		Analysis analysis = repo.findByUrl(url);
 		LOGGER.info("analysis = "+analysis);
 		return analysis;
