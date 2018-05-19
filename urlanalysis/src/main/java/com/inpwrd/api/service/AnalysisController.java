@@ -1,10 +1,10 @@
 package com.inpwrd.api.service;
 
-import javax.validation.constraints.NotNull;
-
+import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +15,7 @@ import com.inpwrd.api.bean.Analysis;
 import com.inpwrd.api.business.AnalysisBusiness;
 
 @RestController
+@Validated
 public class AnalysisController {
 
 	private static Logger LOGGER = LoggerFactory.getLogger("AnalysisController");
@@ -23,7 +24,7 @@ public class AnalysisController {
 	private AnalysisBusiness business;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public Analysis analyze(@RequestParam @NotNull String url) {
+	public Analysis analyze(@RequestParam @NotEmpty String url) {
 		LOGGER.info("GET - " + url);
 		return business.getAnalysis(url);
 	}
