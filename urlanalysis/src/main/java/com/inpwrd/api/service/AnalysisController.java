@@ -14,23 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.inpwrd.api.bean.Analysis;
 import com.inpwrd.api.business.AnalysisBusiness;
 
-@RestController
-@Validated
-public class AnalysisController {
+public @RestController @Validated class AnalysisController {
 
 	private static Logger LOGGER = LoggerFactory.getLogger("AnalysisController");
 
-	@Autowired
-	private AnalysisBusiness business;
+	private @Autowired AnalysisBusiness business;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public Analysis analyze(@RequestParam @NotEmpty String url) {
+	public @RequestMapping(method = RequestMethod.GET) Analysis analyze(
+			@RequestParam @NotEmpty(message = "url cannot be null") String url) {
 		LOGGER.info("GET - " + url);
 		return business.getAnalysis(url);
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public Analysis addAnalysis(@RequestBody Analysis analysis) {
+	public @RequestMapping(method = RequestMethod.POST) Analysis addAnalysis(@RequestBody Analysis analysis) {
 		LOGGER.info("post " + analysis);
 
 		if (analysis.getCallbackUrl() != null) {
