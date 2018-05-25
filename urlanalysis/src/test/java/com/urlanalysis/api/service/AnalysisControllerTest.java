@@ -24,6 +24,6 @@ public @SpringBootTest @RunWith(SpringRunner.class) class AnalysisControllerTest
 		Analysis analysis = new Analysis();
 		analysis.setUrl("google.com");
 		given(this.business.getAnalysis(anyString())).willReturn(analysis);
-		assertThat(analysisController.getAnalysis("abc").getUrl()).isEqualTo("google1.com");
+		assertThat(analysisController.getAnalysis("abc").getUrl()).isEqualTo("google.com");
 	}
 }
