@@ -20,7 +20,7 @@ public @RestController @Validated class AnalysisController {
 
 	private @Autowired AnalysisBusiness business;
 
-	public @RequestMapping(method = RequestMethod.GET) Analysis analyze(
+	public @RequestMapping(method = RequestMethod.GET) Analysis getAnalysis (
 			@RequestParam @NotEmpty(message = "url cannot be null") String url) {
 		LOGGER.info("GET - " + url);
 		return business.getAnalysis(url);
