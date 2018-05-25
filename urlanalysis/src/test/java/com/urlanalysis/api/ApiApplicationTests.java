@@ -1,4 +1,4 @@
-package com.inpwrd.api;
+package com.urlanalysis.api;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

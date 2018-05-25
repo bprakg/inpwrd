@@ -1,13 +1,13 @@
-package com.inpwrd.api.business;
+package com.urlanalysis.api.business;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.inpwrd.api.bean.Analysis;
-import com.inpwrd.api.data.AnalysisData;
-import com.inpwrd.api.integration.AnalysisExternalServices;
+import com.urlanalysis.api.bean.Analysis;
+import com.urlanalysis.api.data.AnalysisData;
+import com.urlanalysis.api.integration.AnalysisExternalServices;
 
 @Component
 public class AnalysisBusiness {

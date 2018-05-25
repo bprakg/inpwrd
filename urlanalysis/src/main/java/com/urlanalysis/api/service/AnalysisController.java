@@ -1,4 +1,4 @@
-package com.inpwrd.api.service;
+package com.urlanalysis.api.service;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inpwrd.api.bean.Analysis;
-import com.inpwrd.api.business.AnalysisBusiness;
+import com.urlanalysis.api.bean.Analysis;
+import com.urlanalysis.api.business.AnalysisBusiness;
 
 public @RestController @Validated class AnalysisController {
 

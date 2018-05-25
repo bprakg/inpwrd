@@ -1,12 +1,12 @@
-package com.inpwrd.api.data;
+package com.urlanalysis.api.data;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.inpwrd.api.bean.Analysis;
-import com.inpwrd.api.repository.AnalysisRepository;
+import com.urlanalysis.api.bean.Analysis;
+import com.urlanalysis.api.repository.AnalysisRepository;
 
 @Service
 public class AnalysisData {

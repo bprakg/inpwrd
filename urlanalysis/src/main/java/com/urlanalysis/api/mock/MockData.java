@@ -1,8 +1,8 @@
-package com.inpwrd.api.mock;
+package com.urlanalysis.api.mock;
 
 import org.springframework.stereotype.Component;
 
-import com.inpwrd.api.bean.Analysis;
+import com.urlanalysis.api.bean.Analysis;
 
 @Component
 public class MockData {

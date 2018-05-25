@@ -1,4 +1,4 @@
-package com.inpwrd.api.bean;
+package com.urlanalysis.api.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
