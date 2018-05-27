@@ -16,8 +16,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.urlanalysis.api.bean.Analysis;
 import com.urlanalysis.api.business.AnalysisBusiness;
 
+import lombok.extern.log4j.Log4j;
+
 @WebMvcTest(AnalysisController.class)
 @RunWith(SpringRunner.class)
+@Log4j
 public class AnalysisControllerTest {
 
 	@MockBean
@@ -32,10 +35,8 @@ public class AnalysisControllerTest {
 		given(this.business.getAnalysis(anyString())).willReturn(analysis);
 		try {
 			mvc.perform(get("/urlanalysis?url=gmail.com")).andExpect(status().isOk());
-			System.out.printf(" asdff ****** %n%s%n ", mvc.perform(get("/urlanalysis?url=gmail.com")));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("logging exception", e);
 		}
 	}
 }
