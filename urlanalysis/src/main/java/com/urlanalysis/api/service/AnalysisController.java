@@ -1,8 +1,6 @@
 package com.urlanalysis.api.service;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,28 +12,31 @@ import org.springframework.web.bind.annotation.RestController;
 import com.urlanalysis.api.bean.Analysis;
 import com.urlanalysis.api.business.AnalysisBusiness;
 
-public @RestController @Validated class AnalysisController {
+import lombok.extern.log4j.Log4j;
 
-	private static Logger LOGGER = LoggerFactory.getLogger("AnalysisController");
+@RestController
+@Validated
+@Log4j
+public class AnalysisController {
 
 	private @Autowired AnalysisBusiness business;
 
-	public @RequestMapping(method = RequestMethod.GET) Analysis getAnalysis (
+	public @RequestMapping(method = RequestMethod.GET) Analysis getAnalysis(
 			@RequestParam @NotEmpty(message = "url cannot be null") String url) {
-		LOGGER.info("GET - " + url);
+		log.info("GET - " + url);
 		return business.getAnalysis(url);
 	}
 
 	public @RequestMapping(method = RequestMethod.POST) Analysis addAnalysis(@RequestBody Analysis analysis) {
-		LOGGER.info("post " + analysis);
+		log.info("post " + analysis);
 
 		if (analysis.getCallbackUrl() != null) {
-			LOGGER.info("new process thread");
+			log.info("new process thread");
 			new Thread(() -> {
 				business.addAnalysis(analysis);
 			}).start();
 
-			LOGGER.info("returning for callback ");
+			log.info("returning for callback ");
 			return null;
 		} else {
 			business.addAnalysis(analysis);
