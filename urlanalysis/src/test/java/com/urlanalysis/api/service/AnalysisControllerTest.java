@@ -1,9 +1,12 @@
 package com.urlanalysis.api.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +24,9 @@ import com.urlanalysis.api.business.AnalysisBusiness;
 public class AnalysisControllerTest {
 
 	@MockBean
+	private AnalysisBusiness businessMock;
+
+	@Autowired
 	private AnalysisBusiness business;
 
 	@Autowired
@@ -29,36 +35,36 @@ public class AnalysisControllerTest {
 	public @Test void getAnalysisTest1() throws Exception {
 		Analysis analysis = Analysis.builder().build();
 		analysis.setUrl("google.com");
-		given(this.business.getAnalysis(anyString())).willReturn(analysis);
+		given(this.businessMock.getAnalysis(anyString())).willReturn(analysis);
 		mvc.perform(get("/urlanalysis?url=gmail.com")).andExpect(status().isOk());
 	}
-//
-//	public @Test void getAnalysisTest2() throws Exception {
-//		Analysis analysis = Analysis.builder().build();
-//		analysis.setUrl("google.com");
-//		given(this.business.getAnalysis(anyString())).willReturn(analysis);
-//		mvc.perform(get("/urlanalysis")).andExpect(status().is4xxClientError());
-//	}
 
-	// @Test
-	// public void getAnalysisTest3() throws Exception {
-	// try {
-	// mvc.perform(get("/urlanalysis?url="));
-	// } catch (ConstraintViolationException cve) {
-	// assertThat(cve.getMessage()).contains("url cannot be null");
-	// return;
-	// }
-	// Assert.fail("Expecting ConstraintViolationException for url");
-	// }
+	public @Test void getAnalysisTest2() throws Exception {
+		Analysis analysis = Analysis.builder().build();
+		analysis.setUrl("google.com");
+		given(this.businessMock.getAnalysis(anyString())).willReturn(analysis);
+		mvc.perform(get("/urlanalysis")).andExpect(status().is4xxClientError());
+	}
 
-	// @Test
-	// public void validationTest1() {
-	// try {
-	// business.getAnalysis(null);
-	// } catch (ConstraintViolationException cve) {
-	// assertThat(cve.getMessage()).contains("url cannot be null");
-	// return;
-	// }
-	// Assert.fail("Expecting ConstraintViolationException for url");
-	// }
+	@Test
+	public void getAnalysisTest3() throws Exception {
+		try {
+			mvc.perform(get("/urlanalysis?url="));
+		} catch (ConstraintViolationException cve) {
+			assertThat(cve.getMessage()).contains("url cannot be null");
+			return;
+		}
+		org.junit.Assert.fail("Expecting ConstraintViolationException for url");
+	}
+
+	@Test
+	public void validationTest1() {
+		try {
+			business.getAnalysis(null);
+		} catch (ConstraintViolationException cve) {
+			assertThat(cve.getMessage()).contains("url cannot be null");
+			return;
+		}
+		org.junit.Assert.fail("Expecting ConstraintViolationException for url");
+	}
 }
