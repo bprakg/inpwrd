@@ -1,16 +1,20 @@
 package com.urlanalysis.api.business;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import com.urlanalysis.api.bean.Analysis;
 import com.urlanalysis.api.data.AnalysisData;
 import com.urlanalysis.api.integration.AnalysisExternalServices;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 
 @Component
-@Log4j
+@Log4j2
+@Validated
 public class AnalysisBusiness {
 
 	@Autowired
@@ -19,7 +23,8 @@ public class AnalysisBusiness {
 	@Autowired
 	private AnalysisExternalServices aes;
 
-	public Analysis getAnalysis(String url) {
+	public Analysis getAnalysis(@NotBlank (message = "{blank.url}") String url) {
+		log.info("inside getAnalysis");
 		return data.getAnalysis(url);
 	}
 

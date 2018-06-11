@@ -1,6 +1,6 @@
 package com.urlanalysis.api.bean;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Builder;
 import lombok.Data;

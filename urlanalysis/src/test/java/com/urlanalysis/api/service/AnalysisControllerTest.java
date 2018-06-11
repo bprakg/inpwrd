@@ -1,7 +1,7 @@
 package com.urlanalysis.api.service;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,11 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.urlanalysis.api.bean.Analysis;
 import com.urlanalysis.api.business.AnalysisBusiness;
 
-import lombok.extern.log4j.Log4j;
-
 @WebMvcTest(AnalysisController.class)
 @RunWith(SpringRunner.class)
-@Log4j
 public class AnalysisControllerTest {
 
 	@MockBean
@@ -29,14 +26,39 @@ public class AnalysisControllerTest {
 	@Autowired
 	private MockMvc mvc;
 
-	public @Test void getAnalysisTest1() {
+	public @Test void getAnalysisTest1() throws Exception {
 		Analysis analysis = Analysis.builder().build();
 		analysis.setUrl("google.com");
 		given(this.business.getAnalysis(anyString())).willReturn(analysis);
-		try {
-			mvc.perform(get("/urlanalysis?url=gmail.com")).andExpect(status().isOk());
-		} catch (Exception e) {
-			log.info("logging exception", e);
-		}
+		mvc.perform(get("/urlanalysis?url=gmail.com")).andExpect(status().isOk());
 	}
+//
+//	public @Test void getAnalysisTest2() throws Exception {
+//		Analysis analysis = Analysis.builder().build();
+//		analysis.setUrl("google.com");
+//		given(this.business.getAnalysis(anyString())).willReturn(analysis);
+//		mvc.perform(get("/urlanalysis")).andExpect(status().is4xxClientError());
+//	}
+
+	// @Test
+	// public void getAnalysisTest3() throws Exception {
+	// try {
+	// mvc.perform(get("/urlanalysis?url="));
+	// } catch (ConstraintViolationException cve) {
+	// assertThat(cve.getMessage()).contains("url cannot be null");
+	// return;
+	// }
+	// Assert.fail("Expecting ConstraintViolationException for url");
+	// }
+
+	// @Test
+	// public void validationTest1() {
+	// try {
+	// business.getAnalysis(null);
+	// } catch (ConstraintViolationException cve) {
+	// assertThat(cve.getMessage()).contains("url cannot be null");
+	// return;
+	// }
+	// Assert.fail("Expecting ConstraintViolationException for url");
+	// }
 }
